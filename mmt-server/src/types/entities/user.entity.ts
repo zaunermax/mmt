@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from '../../../types/Role';
-import { MapToOptional } from '../../../types/common/helpers';
+import { Role } from '../Role';
+import { MapToOptional } from '../common/helpers';
 
 @Entity()
 export class User {

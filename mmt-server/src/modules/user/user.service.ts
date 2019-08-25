@@ -1,6 +1,6 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import { User } from '../../types/entities/user.entity';
 import { Repository } from 'typeorm';
 import { Maybe } from '../../types/common/helpers';
 import { NewUser } from '../../types/dto/NewUser';

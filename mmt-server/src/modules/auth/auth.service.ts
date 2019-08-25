@@ -1,9 +1,8 @@
-import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 
 import { forwardRef, Inject, Injectable, Logger } from '@nestjs/common';
 import { UserService } from '../user/user.service';
-import { User } from '../user/entities/user.entity';
+import { User } from '../../types/entities/user.entity';
 import { ConfigService } from '../config/config.service';
 import { JwtToken } from '../../types/JwtToken';
 import { Nullable } from '../../types/common/helpers';
@@ -29,7 +28,9 @@ export class AuthService {
   }
 
   async validateTokenUser(userId: number): Promise<User> {
-    return this.usersService.findOneOrFail(userId);
+    const user = await this.usersService.findOneOrFail(userId);
+    delete user.pwHash;
+    return user;
   }
 
   public createToken(user: User): Promise<string> {
@@ -39,10 +40,6 @@ export class AuthService {
       id: user.id,
     };
     return this.jwtService.signAsync(payload);
-  }
-
-  public verifyToken(token: string): Promise<JwtToken> {
-    return this.jwtService.verifyAsync<JwtToken>(token);
   }
 
   public async createPwHash(password: string): Promise<string> {
