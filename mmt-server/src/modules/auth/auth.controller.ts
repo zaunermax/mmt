@@ -16,14 +16,14 @@ export class AuthController {
 
   constructor(private readonly authService: AuthService) {}
 
-  @UseGuards(AuthGuard('local'))
   @Post('login')
+  @UseGuards(AuthGuard('local'))
   public login(@Request() req: ReqWithUser): Promise<string> {
     return this.authService.createToken(req.user);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get('me')
+  @UseGuards(AuthGuard('jwt'))
   getProfile(@Request() req: ReqWithUser) {
     return req.user;
   }

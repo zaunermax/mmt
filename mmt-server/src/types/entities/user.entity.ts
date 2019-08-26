@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from '../Role';
 import { MapToOptional } from '../common/helpers';
+import { Transaction } from './transaction.entity';
 
 @Entity()
 export class User {
@@ -10,8 +11,12 @@ export class User {
       if (data.balance) this.balance = data.balance;
       if (data.name) this.name = data.name;
       if (data.pwHash) this.pwHash = data.pwHash;
+      if (data.inventorySpace) this.inventorySpace = data.inventorySpace;
     }
   }
+
+  @OneToMany(() => Transaction, transaction => transaction.user)
+  transactions!: Transaction[];
 
   @PrimaryGeneratedColumn()
   id!: number;
@@ -27,4 +32,7 @@ export class User {
 
   @Column('int')
   balance!: number;
+
+  @Column('int', { default: 50 })
+  inventorySpace!: number;
 }
