@@ -1,6 +1,6 @@
 import { IsNumber } from 'class-validator';
 
-export class RemoveUser {
+export class StartGame {
   @IsNumber()
-  id!: number;
+  minutes!: number;
 }

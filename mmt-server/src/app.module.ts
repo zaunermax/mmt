@@ -5,6 +5,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from './modules/config/config.module';
 import { ConfigService } from './modules/config/config.service';
 import { InventoryModule } from './modules/inventory/inventory.module';
+import { ProductModule } from './modules/product/product.module';
+import { GamestateModule } from './modules/gamestate/gamestate.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { InventoryModule } from './modules/inventory/inventory.module';
     UserModule,
     AuthModule,
     InventoryModule,
+    ProductModule,
+    GamestateModule,
   ],
 })
 export class AppModule {}

@@ -1,5 +1,13 @@
-export interface NewUser {
-  name: string;
+import { IsNumber, IsOptional, IsString } from 'class-validator';
+
+export class NewUser {
+  @IsString()
+  name!: string;
+
+  @IsNumber()
+  @IsOptional()
   balance?: number;
-  password: string;
+
+  @IsString()
+  password!: string;
 }

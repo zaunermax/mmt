@@ -12,7 +12,7 @@ import { User } from '../../types/entities/user.entity';
 import { NewUser } from '../../types/dto/NewUser';
 import { AuthGuard } from '@nestjs/passport';
 import { RemoveUser } from '../../types/dto/RemoveUser';
-import { Roles } from '../../decorators/roles.decorator';
+import { SetRole } from '../../decorators/roles.decorator';
 import { Role } from '../../types/Role';
 import { RoleGuard } from '../../guards/RoleGuard';
 
@@ -31,7 +31,7 @@ export class UserController {
   }
 
   @Post()
-  @Roles(Role.admin)
+  @SetRole(Role.admin)
   @UseGuards(AuthGuard('jwt'), RoleGuard)
   addUser(@Body() body: NewUser): Promise<User> {
     return this.userService.addUser(body);
