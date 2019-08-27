@@ -26,7 +26,7 @@ const tryDecodeToken = () => {
   }
 };
 
-const loginAction = (user: LoginUser): LoginActionThunk => dispatch => {
+export const loginAction = (user: LoginUser): LoginActionThunk => dispatch => {
   MmtApi.login(user).then(token => {
     setToken(token);
     const user = jwtDecode<TokenUser>(token);

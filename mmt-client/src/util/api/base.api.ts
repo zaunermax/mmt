@@ -46,8 +46,7 @@ export class BaseApi {
       if (this.token) addedHeaders['Authorization'] = this.token;
 
       const { data: res }: { data: T } = await axios({
-        baseURL: this.base,
-        url: resource,
+        url: this.base + resource,
         method,
         data,
         headers: {
@@ -58,6 +57,7 @@ export class BaseApi {
 
       return res;
     } catch (e) {
+      console.error(e);
       throw new Error(e);
     }
   }
