@@ -16,5 +16,8 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "devDependencies": {
+    "@types/jwt-decode": "^2.2.1"
   }
 }
