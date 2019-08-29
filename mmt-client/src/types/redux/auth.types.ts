@@ -2,6 +2,7 @@ import { ThunkAction } from 'redux-thunk';
 import { TokenUser } from '../auth.types';
 import { Nullable } from '../helper.types';
 import { ImmutableObject } from 'seamless-immutable';
+import { GlobalAppState } from '../../redux/store';
 
 export interface AuthState {
   user: Nullable<TokenUser>;
@@ -18,4 +19,4 @@ interface LoginAction {
 
 export type AuthActionTypes = LoginAction;
 
-export type LoginActionThunk = ThunkAction<void, {}, {}, AuthActionTypes>;
+export type LoginActionThunk = ThunkAction<void, GlobalAppState, {}, AuthActionTypes>;

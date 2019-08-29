@@ -4,18 +4,14 @@ import { CanActivateFn, routeIsLocDescriptor } from '../../../util/route.helper'
 import { LoadingComponent } from './loading.component';
 import { ROUTE_LOGIN } from '../app.routes';
 import { useSelector } from 'react-redux';
-import { AppState } from '../../../redux/store';
+import { GlobalAppState } from '../../../redux/store';
 
 export interface PrivateRouteProps extends RouteProps {
   canActivate: CanActivateFn;
 }
 
-export const PrivateRoute: FC<PrivateRouteProps> = ({
-  component,
-  canActivate,
-  ...rest
-}) => {
-  const user = useSelector((state: AppState) => state.auth.user);
+export const PrivateRoute: FC<PrivateRouteProps> = ({ canActivate, ...routeProps }) => {
+  const user = useSelector((state: GlobalAppState) => state.auth.user);
 
   const route = user ? canActivate({ currentUser: user }) : false;
 
@@ -25,7 +21,7 @@ export const PrivateRoute: FC<PrivateRouteProps> = ({
     <Redirect to={ROUTE_LOGIN} />
   ) : (
     <Suspense fallback={<LoadingComponent />}>
-      <Route component={component} {...rest} />
+      <Route {...routeProps} />
     </Suspense>
   );
 };

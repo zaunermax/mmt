@@ -1,8 +1,17 @@
 import React, { FC } from 'react';
 import { makeStyles, ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme, CssBaseline } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      main: '#333333',
+    },
+    secondary: blue,
+  },
+});
 
 const useGlobalStyle = makeStyles({
   '@global': {

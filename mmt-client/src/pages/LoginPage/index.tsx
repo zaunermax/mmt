@@ -13,7 +13,7 @@ import {
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/actions/auth';
-import { AppState } from '../../redux/store';
+import { GlobalAppState } from '../../redux/store';
 import { ROUTE_DASHBOARD } from '../../components/App/app.routes';
 import { Redirect } from 'react-router-dom';
 
@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme>(theme =>
 export default () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const user = useSelector((state: AppState) => state.auth.user);
+  const user = useSelector((state: GlobalAppState) => state.auth.user);
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 

@@ -1,5 +1,5 @@
 import React, { FC, lazy } from 'react';
-import { Switch, Redirect } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import { PublicRoute } from './components/public.route';
 import { PrivateRoute } from './components/private.route';
 
@@ -9,6 +9,7 @@ export const ROUTE_DASHBOARD = '/dashboard';
 
 const AsyncLoginPage = lazy(() => import('../../pages/LoginPage'));
 const AsyncDashboardPage = lazy(() => import('../../pages/Dashboard'));
+const AsyncNotFoundPage = lazy(() => import('../../pages/404'));
 
 export const Routes: FC = () => {
   return (
@@ -19,8 +20,8 @@ export const Routes: FC = () => {
         path={ROUTE_DASHBOARD}
         canActivate={() => true}
         component={AsyncDashboardPage}
-        exact
       />
+      <PublicRoute component={AsyncNotFoundPage} />
     </Switch>
   );
 };

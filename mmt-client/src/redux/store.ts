@@ -2,12 +2,14 @@ import ThunkMiddleware from 'redux-thunk';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { authReducer } from './actions/auth';
+import { appReducer } from './actions/app';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  app: appReducer,
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
+export type GlobalAppState = ReturnType<typeof rootReducer>;
 
 export const initStore = () => {
   const middleware = [ThunkMiddleware];
