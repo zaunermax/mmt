@@ -13,7 +13,10 @@ export class Transaction {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Product, product => product.transactions)
+  @ManyToOne(
+    () => Product,
+    product => product.transactions,
+  )
   product!: Product;
 
   @ManyToOne(() => User)

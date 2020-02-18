@@ -12,7 +12,10 @@ export class History {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Product, product => product.history)
+  @ManyToOne(
+    () => Product,
+    product => product.history,
+  )
   product!: Product;
 
   @CreateDateColumn()
