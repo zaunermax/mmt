@@ -26,7 +26,7 @@ export class User {
   @Column('enum', { enum: Role, default: Role.player })
   role!: Role;
 
-  @Column('int')
+  @Column('int', { default: 10000 })
   balance!: number;
 
   @Column('int', { default: 50 })
