@@ -42,8 +42,8 @@ export default () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state: GlobalAppState) => state.auth.user);
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = useCallback<FormEventHandler>(
     e => {

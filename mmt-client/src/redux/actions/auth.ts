@@ -9,17 +9,22 @@ import {
   LoginActionThunk,
 } from '../../types/redux/auth.types';
 import { LoginUser, TokenUser } from '../../types/auth.types';
+import { Nullable } from '../../types/helper.types';
 
 const setToken = (token: string): void => {
   localStorage.setItem('token', token);
   MmtApi.Token = token;
 };
 
-const tryDecodeToken = () => {
+type TokenUserWithData = TokenUser & { iat: number; exp: number };
+
+const tryDecodeToken = (): Nullable<TokenUserWithData> => {
   try {
     const token = localStorage.getItem('token');
     if (!token) return null;
-    return jwtDecode<TokenUser>(token);
+    const decoded = jwtDecode<TokenUserWithData>(token);
+    if (Date.now() >= decoded.exp * 1000) return null;
+    return decoded;
   } catch (err) {
     localStorage.removeItem('token');
     return null;
