@@ -1,18 +1,11 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from '../Role';
-import { MapToOptional } from '../common/helpers';
 import { Transaction } from './transaction.entity';
 
 @Entity()
 export class User {
-  constructor(data?: Omit<MapToOptional<User>, 'id'>) {
-    if (data) {
-      if (data.role) this.role = data.role;
-      if (data.balance) this.balance = data.balance;
-      if (data.name) this.name = data.name;
-      if (data.pwHash) this.pwHash = data.pwHash;
-      if (data.inventorySpace) this.inventorySpace = data.inventorySpace;
-    }
+  constructor(data?: Omit<Partial<User>, 'id'>) {
+    if (data) Object.assign(this, data);
   }
 
   @OneToMany(() => Transaction, transaction => transaction.user)
@@ -30,7 +23,7 @@ export class User {
   @Column('enum', { enum: Role, default: Role.player })
   role!: Role;
 
-  @Column('int')
+  @Column('int', { default: 10000 })
   balance!: number;
 
   @Column('int', { default: 50 })

@@ -31,14 +31,19 @@ export class UserService {
 
   async addUser(userDto: NewUser): Promise<User> {
     const pwHash = await this.authService.createPwHash(userDto.password);
+
     this.logger.verbose(`PW Hash: ${pwHash}`);
+
     const user = new User({
       balance: userDto.balance,
       name: userDto.name,
       pwHash,
     });
+
     const [newUser] = await this.userRepo.save([user]);
+
     delete newUser.pwHash;
+
     return newUser;
   }
 

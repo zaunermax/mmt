@@ -6,15 +6,7 @@ import { History } from './history.entity';
 @Entity()
 export class Product {
   constructor(data?: Omit<MapToOptional<Product>, 'id'>) {
-    if (data) {
-      if (data.amount) this.amount = data.amount;
-      if (data.name) this.name = data.name;
-      if (data.price) this.price = data.price;
-      if (data.productionPerTick)
-        this.productionPerTick = data.productionPerTick;
-      if (data.imageUrl) this.imageUrl = data.imageUrl;
-      if (data.description) this.description = data.description;
-    }
+    if (data) Object.assign(this, data);
   }
 
   @OneToMany(() => Transaction, transaction => transaction.product)
